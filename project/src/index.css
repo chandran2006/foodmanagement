@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 140 20% 98%;
+    --foreground: 150 30% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 30% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 30% 10%;
+
+    --primary: 145 63% 32%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 145 20% 94%;
+    --secondary-foreground: 145 40% 20%;
+
+    --muted: 140 15% 94%;
+    --muted-foreground: 150 10% 45%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 140 15% 90%;
+    --input: 140 15% 90%;
+    --ring: 145 63% 32%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 145 30% 12%;
+    --sidebar-foreground: 140 20% 90%;
+    --sidebar-primary: 145 63% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 145 25% 18%;
+    --sidebar-accent-foreground: 140 20% 90%;
+    --sidebar-border: 145 20% 20%;
+    --sidebar-ring: 145 63% 42%;
+
+    /* Custom tokens */
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 210 80% 52%;
+    --info-foreground: 0 0% 100%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(145 63% 32%), hsl(160 50% 25%));
+    --gradient-card: linear-gradient(135deg, hsl(145 63% 32% / 0.05), hsl(38 92% 50% / 0.05));
+    --shadow-card: 0 1px 3px hsl(150 30% 10% / 0.06), 0 4px 16px hsl(150 30% 10% / 0.04);
+    --shadow-elevated: 0 4px 12px hsl(150 30% 10% / 0.08), 0 16px 40px hsl(150 30% 10% / 0.06);
+
+    --font-heading: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  .dark {
+    --background: 150 30% 6%;
+    --foreground: 140 20% 95%;
+
+    --card: 150 25% 9%;
+    --card-foreground: 140 20% 95%;
+
+    --popover: 150 25% 9%;
+    --popover-foreground: 140 20% 95%;
+
+    --primary: 145 63% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 145 20% 15%;
+    --secondary-foreground: 140 20% 90%;
+
+    --muted: 150 15% 14%;
+    --muted-foreground: 140 10% 55%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 150 15% 16%;
+    --input: 150 15% 16%;
+    --ring: 145 63% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer components {
+  .stat-card {
+    @apply rounded-xl bg-card p-6 border border-border;
+    box-shadow: var(--shadow-card);
+  }
+
+  .food-card {
+    @apply rounded-xl bg-card border border-border overflow-hidden transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+
+  .food-card:hover {
+    box-shadow: var(--shadow-elevated);
+    transform: translateY(-2px);
+  }
+
+  .status-available {
+    @apply bg-primary/10 text-primary;
+  }
+  .status-requested {
+    @apply bg-accent/10 text-accent;
+  }
+  .status-picked-up {
+    @apply bg-info/10;
+    color: hsl(var(--info));
+  }
+  .status-delivered {
+    @apply bg-muted text-muted-foreground;
+  }
+
+  .dashboard-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5;
+  }
+
+  .page-header {
+    @apply mb-8;
+  }
+
+  .page-title {
+    @apply text-2xl md:text-3xl font-bold tracking-tight;
+    font-family: var(--font-heading);
+  }
+
+  .page-subtitle {
+    @apply text-muted-foreground mt-1;
+  }
+}
