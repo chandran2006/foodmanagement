@@ -140,3 +140,12 @@ Access API documentation at: http://localhost:8080/swagger-ui.html
 - `food_donations` - Food donation details
 - `food_requests` - NGO food requests
 - `pickups` - Volunteer pickup information
+
+## 🔐 Dummy Login Credentials
+
+The application automatically creates dummy users on first run:
+
+- **Admin**: admin@foodbridge.com / admin123
+- **Donor**: donor@foodbridge.com / donor123
+- **NGO**: ngo@foodbridge.com / ngo123
+- **Volunteer**: volunteer@foodbridge.com / volunteer123

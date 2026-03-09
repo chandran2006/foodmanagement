@@ -1,5 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
-import { Leaf, Home, Upload, List, Truck, BarChart3, Users, Settings, Package } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Leaf, Home, Upload, List, Truck, BarChart3, Users, Settings, Package, LogOut } from "lucide-react";
 import type { UserRole } from "@/services/api";
 
 interface SidebarProps {
@@ -37,7 +37,14 @@ const menuItems: Record<UserRole, { label: string; path: string; icon: React.Ele
 
 const DashboardSidebar = ({ role, isOpen, onClose }: SidebarProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const items = menuItems[role];
+
+  const handleSignOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
+    navigate('/login');
+  };
 
   return (
     <>
@@ -47,7 +54,7 @@ const DashboardSidebar = ({ role, isOpen, onClose }: SidebarProps) => {
       )}
 
       <aside
-        className={`fixed left-0 top-0 z-50 flex h-full w-64 flex-col border-r border-sidebar-border bg-sidebar transition-transform duration-300 lg:static lg:translate-x-0 ${
+        className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-sidebar-border bg-sidebar transition-transform duration-300 lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -80,7 +87,14 @@ const DashboardSidebar = ({ role, isOpen, onClose }: SidebarProps) => {
         </nav>
 
         <div className="border-t border-sidebar-border p-4">
-          <p className="text-xs text-sidebar-foreground/50 capitalize">{role} Account</p>
+          <button
+            onClick={handleSignOut}
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
+          >
+            <LogOut className="h-4 w-4" />
+            Sign Out
+          </button>
+          <p className="text-xs text-sidebar-foreground/50 capitalize mt-2">{role} Account</p>
         </div>
       </aside>
     </>

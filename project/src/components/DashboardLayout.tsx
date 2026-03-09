@@ -14,7 +14,7 @@ const DashboardLayout = ({ role, children }: DashboardLayoutProps) => {
   return (
     <div className="flex min-h-screen">
       <DashboardSidebar role={role} isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col lg:ml-64">
         <header className="sticky top-0 z-30 flex h-14 items-center border-b border-border bg-background/80 px-4 backdrop-blur-md lg:hidden">
           <button onClick={() => setSidebarOpen(true)}>
             <Menu className="h-5 w-5" />
