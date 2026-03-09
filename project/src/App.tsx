@@ -14,6 +14,10 @@ import UploadFood from "./pages/UploadFood";
 import FoodListings from "./pages/FoodListings";
 import PickupRequests from "./pages/PickupRequests";
 import Analytics from "./pages/Analytics";
+import NGOFoodListings from "./pages/NGOFoodListings";
+import NGOPickupRequests from "./pages/NGOPickupRequests";
+import NGOAnalytics from "./pages/NGOAnalytics";
+import VolunteerAnalytics from "./pages/VolunteerAnalytics";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +40,10 @@ const App = () => (
           <Route path="/food-listings" element={<FoodListings />} />
           <Route path="/pickup-requests" element={<PickupRequests />} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/ngo-food-listings" element={<NGOFoodListings />} />
+          <Route path="/ngo-pickup-requests" element={<NGOPickupRequests />} />
+          <Route path="/ngo-analytics" element={<NGOAnalytics />} />
+          <Route path="/volunteer-analytics" element={<VolunteerAnalytics />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

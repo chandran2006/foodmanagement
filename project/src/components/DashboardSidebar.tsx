@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Leaf, Home, Upload, List, Truck, BarChart3, Users, Settings, Package, LogOut } from "lucide-react";
+import { Leaf, Home, Upload, List, Truck, BarChart3, Users, Settings, Package, LogOut, User } from "lucide-react";
 import type { UserRole } from "@/services/api";
 
 interface SidebarProps {
@@ -17,14 +17,14 @@ const menuItems: Record<UserRole, { label: string; path: string; icon: React.Ele
   ],
   ngo: [
     { label: "Dashboard", path: "/ngo-dashboard", icon: Home },
-    { label: "Food Listings", path: "/food-listings", icon: Package },
-    { label: "Pickup Requests", path: "/pickup-requests", icon: Truck },
-    { label: "Analytics", path: "/analytics", icon: BarChart3 },
+    { label: "Food Listings", path: "/ngo-food-listings", icon: Package },
+    { label: "Pickup Requests", path: "/ngo-pickup-requests", icon: Truck },
+    { label: "Analytics", path: "/ngo-analytics", icon: BarChart3 },
   ],
   volunteer: [
     { label: "Dashboard", path: "/volunteer-dashboard", icon: Home },
     { label: "Pickup Requests", path: "/pickup-requests", icon: Truck },
-    { label: "Analytics", path: "/analytics", icon: BarChart3 },
+    { label: "Analytics", path: "/volunteer-analytics", icon: BarChart3 },
   ],
   admin: [
     { label: "Dashboard", path: "/admin-dashboard", icon: Home },
@@ -87,6 +87,12 @@ const DashboardSidebar = ({ role, isOpen, onClose }: SidebarProps) => {
         </nav>
 
         <div className="border-t border-sidebar-border p-4">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sidebar-primary">
+              <User className="h-4 w-4 text-sidebar-primary-foreground" />
+            </div>
+            <p className="text-xs text-sidebar-foreground/50 capitalize">{role} Account</p>
+          </div>
           <button
             onClick={handleSignOut}
             className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
@@ -94,7 +100,6 @@ const DashboardSidebar = ({ role, isOpen, onClose }: SidebarProps) => {
             <LogOut className="h-4 w-4" />
             Sign Out
           </button>
-          <p className="text-xs text-sidebar-foreground/50 capitalize mt-2">{role} Account</p>
         </div>
       </aside>
     </>

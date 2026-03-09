@@ -1,8 +1,9 @@
-import Navbar from "@/components/Navbar";
+import DashboardLayout from "@/components/DashboardLayout";
 import StatCard from "@/components/StatCard";
 import { mockStats } from "@/services/api";
 import { Package, Users, Truck, Heart, BarChart3, TrendingUp } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from "recharts";
+import type { UserRole } from "@/services/api";
 
 const monthlyData = [
   { month: "Jan", donations: 120, meals: 2400 },
@@ -21,6 +22,7 @@ const pieData = [
 ];
 
 const Analytics = () => {
+  const userRole = (localStorage.getItem('userRole') as UserRole) || 'donor';
   const stats = [
     { label: "Total Donated", value: mockStats.totalDonations, icon: Package, trend: "12%" },
     { label: "Meals Served", value: mockStats.mealsServed, icon: Heart, trend: "15%" },
@@ -29,13 +31,11 @@ const Analytics = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <div className="container mx-auto px-4 py-8">
-        <div className="page-header">
-          <h1 className="page-title">Analytics Dashboard</h1>
-          <p className="page-subtitle">Track the impact of food redistribution</p>
-        </div>
+    <DashboardLayout role={userRole}>
+      <div className="page-header">
+        <h1 className="page-title">Analytics Dashboard</h1>
+        <p className="page-subtitle">Track the impact of food redistribution</p>
+      </div>
 
         <div className="dashboard-grid mb-8">
           {stats.map(s => <StatCard key={s.label} {...s} />)}
@@ -92,10 +92,9 @@ const Analytics = () => {
                 ))}
               </div>
             </div>
-          </div>
         </div>
       </div>
-    </div>
+    </DashboardLayout>
   );
 };
 

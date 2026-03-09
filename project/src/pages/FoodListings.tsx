@@ -1,14 +1,16 @@
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
+import DashboardLayout from "@/components/DashboardLayout";
 import FoodCard from "@/components/FoodCard";
 import { mockDonations } from "@/services/api";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
+import type { UserRole } from "@/services/api";
 
 const FoodListings = () => {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const userRole = (localStorage.getItem('userRole') as UserRole) || 'donor';
 
   const filtered = mockDonations.filter(d => {
     const matchesSearch = d.foodName.toLowerCase().includes(search.toLowerCase()) || d.pickupLocation.toLowerCase().includes(search.toLowerCase());
@@ -16,14 +18,20 @@ const FoodListings = () => {
     return matchesSearch && matchesStatus;
   });
 
+  const getTitle = () => {
+    switch(userRole) {
+      case 'donor': return 'My Donations';
+      case 'admin': return 'All Donations';
+      default: return 'Food Listings';
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <div className="container mx-auto px-4 py-8">
-        <div className="page-header">
-          <h1 className="page-title">Food Listings</h1>
-          <p className="page-subtitle">Browse all available food donations</p>
-        </div>
+    <DashboardLayout role={userRole}>
+      <div className="page-header">
+        <h1 className="page-title">{getTitle()}</h1>
+        <p className="page-subtitle">Browse all available food donations</p>
+      </div>
 
         <div className="mb-6 flex flex-col gap-3 sm:flex-row">
           <div className="relative flex-1">
@@ -45,11 +53,10 @@ const FoodListings = () => {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map(d => <FoodCard key={d.id} donation={d} showRequestButton />)}
         </div>
-        {filtered.length === 0 && (
-          <p className="mt-12 text-center text-muted-foreground">No food donations found.</p>
-        )}
-      </div>
-    </div>
+      {filtered.length === 0 && (
+        <p className="mt-12 text-center text-muted-foreground">No food donations found.</p>
+      )}
+    </DashboardLayout>
   );
 };
 
